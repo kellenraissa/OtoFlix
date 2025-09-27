@@ -11,6 +11,9 @@ export const lightTheme: ITheme = {
       black: colors.black,
       white: colors.white,
     },
+    card: {
+      ...darkTheme.colors.card,
+    },
     field: {
       ...darkTheme.colors.field,
       color: colors.white,

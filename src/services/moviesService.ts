@@ -5,7 +5,7 @@ import { tmdbApi } from "./api/api";
 
 export async function getMovies(page = 1, language = MOVIES_LANG_PT_BR) {
   const { data } = await tmdbApi.get<TMDBPaginated<MovieType>>(
-    "/movie/popular",
+    "movie/top_rated",
     {
       params: { page, language },
     }

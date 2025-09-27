@@ -7,13 +7,13 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Link } from "expo-router";
 
-export default function HomeScreen() {
+export default function HomeScreens() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#662121", dark: "#1D3D47" }}
       headerImage={
         <Image
-          source={require("@/assets/images/partial-react-logo.png")}
+          // source={require("../src/assets/images/partial-react-logo.png")}
           style={styles.reactLogo}
         />
       }

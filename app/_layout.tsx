@@ -54,7 +54,7 @@ function AuthGate() {
   useEffect(() => {
     if (!rootState?.key || loading) return;
     if (!session && !inAuthGroup) router.replace("/(auth)/login");
-    if (session && inAuthGroup) router.replace("/(tabs)");
+    if (session && inAuthGroup) router.replace("/(private)");
   }, [rootState?.key, loading, session, inAuthGroup, router]);
 
   return null;

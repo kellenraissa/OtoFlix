@@ -19,7 +19,12 @@ type TextColorType =
   | BlackAndWhiteType
   | ZincType
   | MaintenanceStatusType;
-type IconColorType = StatusType | BlackAndWhiteType | "primary" | ZincType;
+type IconColorType =
+  | StatusType
+  | BlackAndWhiteType
+  | "primary"
+  | "yellow"
+  | ZincType;
 
 // ------------------ generic types components ------------------
 
@@ -32,6 +37,10 @@ interface ButtonThemeProps {
   background: string;
   color: string;
   border: string;
+}
+
+interface CardThemeProps {
+  background: string;
 }
 
 interface MenuThemeProps {

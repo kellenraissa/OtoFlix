@@ -23,6 +23,7 @@ export const darkTheme: ITheme = {
     icon: {
       black: colors.black,
       white: colors.white,
+      yellow: colors.yellow,
       primary: colors.primary,
       zinc_400: colors.zinc_400,
       zinc_600: colors.zinc_600,
@@ -36,6 +37,9 @@ export const darkTheme: ITheme = {
       online: colors.online,
       pending: colors.pending,
       offline: colors.offline,
+    },
+    card: {
+      background: colors.background.card,
     },
     button: {
       primary: {

@@ -5,7 +5,7 @@ interface ThemeColors {
 
   text: TextRecord;
   icon: IconRecord;
-
+  card: CardThemeProps;
   toast: ToastRecord;
   menu: MenuThemeProps;
   button: ButtonRecord;

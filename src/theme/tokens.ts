@@ -1,6 +1,7 @@
 export const colors = {
   black: "#000",
   white: "#FFF",
+  yellow: "#F5C518",
 
   primary: "#FF407D",
   secondary: "#f48cadff",
@@ -16,6 +17,7 @@ export const colors = {
   zinc_800: "#727272",
 
   background: {
+    card: "rgba(225, 225, 225, 0.05)",
     dark_300: "#484848",
     dark_400: "#393939",
     dark_600: "#2A2A2A",

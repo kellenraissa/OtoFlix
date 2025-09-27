@@ -7,4 +7,6 @@ export type MovieType = {
   overview?: string;
   release_date?: string;
   vote_average?: number;
+  popularity?: number;
+  vote_count?: number;
 };

@@ -1,10 +1,10 @@
 import Button from "@/components/Button";
 import { Input } from "@/components/Input";
 import { Text } from "@/components/Text";
+import { useAuth } from "@/context/useAuth";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Image, ImageBackground } from "react-native";
-import { useAuth } from "../../src/context/useAuth";
 import { Container, FormFields, ScrollViewStyled } from "./styles";
 
 export default function LoginScreen() {
@@ -13,12 +13,12 @@ export default function LoginScreen() {
 
   return (
     <ImageBackground
-      source={require("../../src/assets/images/backgroundLogin.png")}
+      source={require("@/assets/images/backgroundLogin.png")}
       style={{ flex: 1, width: "100%" }}
     >
       <ScrollViewStyled>
         <Container>
-          <Image source={require("../../src/assets/images/OtoFlix.png")} />
+          <Image source={require("@/assets/images/OtoFlix.png")} />
           <Text color="white" size={10} isCenter>
             Realize seu login para continuar
           </Text>
@@ -50,7 +50,7 @@ export default function LoginScreen() {
             text="Entrar"
             onPress={() => {
               signIn({ userId: "123" });
-              router.replace("/(tabs)");
+              router.replace("/(private)");
             }}
             // loading={isLogin}
           />
