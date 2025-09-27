@@ -1,0 +1,64 @@
+import { useFonts } from "expo-font";
+import {
+  Slot,
+  useRootNavigationState,
+  useRouter,
+  useSegments,
+} from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect } from "react";
+
+import { AuthProvider, useAuth } from "@/context/useAuth";
+import { AppThemeProvider, useAppTheme } from "@/theme";
+
+SplashScreen.preventAutoHideAsync();
+
+export default function RootLayout() {
+  const [loaded] = useFonts({
+    "Montserrat-Light": require("../src/assets/fonts/Montserrat-Light.ttf"),
+    "Montserrat-Regular": require("../src/assets/fonts/Montserrat-Regular.ttf"),
+    "Montserrat-Medium": require("../src/assets/fonts/Montserrat-Medium.ttf"),
+    "Montserrat-SemiBold": require("../src/assets/fonts/Montserrat-SemiBold.ttf"),
+    "Montserrat-Bold": require("../src/assets/fonts/Montserrat-Bold.ttf"),
+  });
+
+  useEffect(() => {
+    if (loaded) SplashScreen.hideAsync();
+  }, [loaded]);
+
+  if (!loaded) return null;
+
+  return (
+    <AppThemeProvider>
+      <AuthProvider>
+        <AuthGate />
+        <ThemedStatusBar />
+        <Slot />
+      </AuthProvider>
+    </AppThemeProvider>
+  );
+}
+
+function AuthGate() {
+  const { session, loading } = useAuth();
+  const rootState = useRootNavigationState();
+  const segments = useSegments();
+  const router = useRouter();
+  const inAuthGroup = segments[0] === "(auth)";
+
+  useEffect(() => {
+    if (!rootState?.key || loading) return;
+    if (!session && !inAuthGroup) router.replace("/(auth)/login");
+    if (session && inAuthGroup) router.replace("/(tabs)");
+  }, [rootState?.key, loading, session, inAuthGroup, router]);
+
+  return null;
+}
+
+function ThemedStatusBar() {
+  const theme = useAppTheme();
+  const isDark =
+    theme.colors.background !== "#FFFFFF" && theme.colors.background !== "#fff";
+  return <StatusBar style={isDark ? "light" : "dark"} />;
+}
