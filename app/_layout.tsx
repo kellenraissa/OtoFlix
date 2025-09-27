@@ -1,3 +1,4 @@
+import { store } from "@/store";
 import { useFonts } from "expo-font";
 import {
   Slot,
@@ -8,6 +9,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
+import { Provider } from "react-redux";
 
 import { AuthProvider, useAuth } from "@/context/useAuth";
 import { AppThemeProvider, useAppTheme } from "@/theme";
@@ -31,11 +33,13 @@ export default function RootLayout() {
 
   return (
     <AppThemeProvider>
-      <AuthProvider>
-        <AuthGate />
-        <ThemedStatusBar />
-        <Slot />
-      </AuthProvider>
+      <Provider store={store}>
+        <AuthProvider>
+          <AuthGate />
+          <ThemedStatusBar />
+          <Slot />
+        </AuthProvider>
+      </Provider>
     </AppThemeProvider>
   );
 }

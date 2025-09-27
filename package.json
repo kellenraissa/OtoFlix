@@ -17,6 +17,7 @@
     "@react-navigation/bottom-tabs": "^7.4.0",
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.8",
+    "@reduxjs/toolkit": "^2.9.0",
     "axios": "^1.12.2",
     "expo": "~54.0.10",
     "expo-constants": "~18.0.9",
@@ -45,6 +46,7 @@
     "react-native-svg": "15.12.1",
     "react-native-web": "~0.21.0",
     "react-native-worklets": "0.5.1",
+    "react-redux": "^9.2.0",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {

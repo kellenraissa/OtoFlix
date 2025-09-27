@@ -1,107 +1,107 @@
-import { Image } from "expo-image";
-import { Platform, StyleSheet } from "react-native";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { fetchPopularMovies, moviesReset } from "@/store/movies";
+import {
+  selectMovies,
+  selectMoviesPage,
+  selectMoviesStatus,
+  selectMoviesTotal,
+} from "@/store/movies/selectors";
+import { RequestStatus } from "@/types/RequestStatus"; // se você usa enum
+import React, { useCallback, useEffect, useState } from "react";
+import {
+  FlatList,
+  Image,
+  RefreshControl,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-import { HelloWave } from "@/components/hello-wave";
-import ParallaxScrollView from "@/components/parallax-scroll-view";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import { Link } from "expo-router";
+const IMG = (path?: string) =>
+  path ? `https://image.tmdb.org/t/p/w342${path}` : undefined;
 
-export default function HomeScreen() {
+export default function Popular() {
+  const dispatch = useAppDispatch();
+  const items = useAppSelector(selectMovies);
+  const status = useAppSelector(selectMoviesStatus);
+  const page = useAppSelector(selectMoviesPage);
+  const total = useAppSelector(selectMoviesTotal);
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      dispatch(fetchPopularMovies(1));
+    }
+  }, [dispatch, items.length]);
+
+  const canLoadMore = status !== RequestStatus.Loading && page < total;
+
+  const loadMore = useCallback(() => {
+    if (canLoadMore) {
+      dispatch(fetchPopularMovies(page + 1));
+    }
+  }, [dispatch, page, canLoadMore]);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    dispatch(moviesReset());
+    await dispatch(fetchPopularMovies(1));
+    setRefreshing(false);
+  }, [dispatch]);
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#662121", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
+    <FlatList
+      data={items}
+      keyExtractor={(it, i) => String(`${it.id}-${i}`)}
+      renderItem={({ item }) => (
+        <View style={{ flexDirection: "row", padding: 12, gap: 12 }}>
+          {item.poster_path ? (
+            <Image
+              source={{ uri: IMG(item.poster_path) }}
+              style={{ width: 90, height: 135, borderRadius: 8 }}
+            />
+          ) : null}
+          <Text style={{ flex: 1, fontWeight: "600" }}>
+            {item.title || item.name}
+          </Text>
+        </View>
+      )}
+      onEndReachedThreshold={0.5}
+      onEndReached={loadMore}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1xs: Try it</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: "cmd + d",
-              android: "cmd + m",
-              web: "F12",
-            })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction
-              title="Action"
-              icon="cube"
-              onPress={() => alert("Action pressed")}
-            />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert("Share pressed")}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert("Delete pressed")}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
-
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">
-            npm run reset-project
-          </ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      ListFooterComponent={
+        <TouchableOpacity
+          disabled={!canLoadMore}
+          onPress={loadMore}
+          style={{
+            padding: 16,
+            alignItems: "center",
+            opacity: canLoadMore ? 1 : 0.5,
+          }}
+        >
+          <Text>
+            {status === RequestStatus.Loading
+              ? "Carregando..."
+              : canLoadMore
+              ? "Carregar mais"
+              : "Fim da lista"}
+          </Text>
+        </TouchableOpacity>
+      }
+      ListEmptyComponent={
+        status === RequestStatus.Loading ? (
+          <Text style={{ textAlign: "center", marginTop: 24 }}>
+            Carregando...
+          </Text>
+        ) : (
+          <Text style={{ textAlign: "center", marginTop: 24 }}>
+            Nenhum item.
+          </Text>
+        )
+      }
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-});

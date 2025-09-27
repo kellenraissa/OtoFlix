@@ -86,7 +86,6 @@ export const TextInputField = styled.TextInput.attrs<TextInputFieldProps>(
       color: ${colors.field.color};
       background-color: ${colors.field.background};
       border: 1px #fff;
-
       font-family: ${fonts.montserrat.medium};
       font-size: ${window.scale(10)}px;
 

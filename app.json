@@ -6,11 +6,15 @@
     "orientation": "portrait",
     "icon": "./src/assets/images/OtoFlix.png",
     "scheme": "otoflix",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.otoflix.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +25,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.OtoFlix"
+      "package": "com.otoflix.app"
     },
     "web": {
       "output": "static",
