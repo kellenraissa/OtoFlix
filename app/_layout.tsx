@@ -1,5 +1,10 @@
-import { AuthProvider, useAuth } from "@/context/useAuth";
 import { store } from "@/store";
+import {
+  hydrateAuth,
+  selectAuthLoading,
+  selectIsAuthenticated,
+  watchAuth,
+} from "@/store/auth";
 import { hydrateFavorites, watchFavorites } from "@/store/favorites";
 import { AppThemeProvider, useAppTheme } from "@/theme";
 import { useFonts } from "expo-font";
@@ -12,7 +17,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,14 +30,15 @@ export default function RootLayout() {
     "Montserrat-Bold": require("../src/assets/fonts/Montserrat-Bold.ttf"),
   });
 
-  // --- Favorites persistence with MMKV ---
+  // --- Favorites persistence with MMKV ------------
   // Load saved favorites and keep Redux in sync
   hydrateFavorites(store);
+  hydrateAuth(store);
   useEffect(() => {
-    const unsubscribe = watchFavorites(store);
-    return () => unsubscribe();
+    const unSubs = [watchFavorites(store), watchAuth(store)];
+    return () => unSubs.forEach((u) => u && u());
   }, []);
-  //-----------------------------
+  //-----------------------------------------------
 
   useEffect(() => {
     if (loaded) SplashScreen.hideAsync();
@@ -43,28 +49,28 @@ export default function RootLayout() {
   return (
     <AppThemeProvider>
       <Provider store={store}>
-        <AuthProvider>
-          <AuthGate />
-          <ThemedStatusBar />
-          <Slot />
-        </AuthProvider>
+        <AuthGate />
+        <ThemedStatusBar />
+        <Slot />
       </Provider>
     </AppThemeProvider>
   );
 }
 
 function AuthGate() {
-  const { session, loading } = useAuth();
   const rootState = useRootNavigationState();
   const segments = useSegments();
   const router = useRouter();
+
+  const loading = useSelector(selectAuthLoading);
+  const isAuthed = useSelector(selectIsAuthenticated);
   const inAuthGroup = segments[0] === "(auth)";
 
   useEffect(() => {
     if (!rootState?.key || loading) return;
-    if (!session && !inAuthGroup) router.replace("/(auth)/login");
-    if (session && inAuthGroup) router.replace("/(private)");
-  }, [rootState?.key, loading, session, inAuthGroup, router]);
+    if (!isAuthed && !inAuthGroup) router.replace("/(auth)/login");
+    if (isAuthed && inAuthGroup) router.replace("/(private)");
+  }, [rootState?.key, loading, isAuthed, inAuthGroup, router]);
 
   return null;
 }

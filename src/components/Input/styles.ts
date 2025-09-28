@@ -24,7 +24,7 @@ interface TextInputLabelProps extends TextProps {
 export const TextInputLabel = styled(Text).attrs<TextInputLabelProps>(
   (props) => {
     return {
-      color: !!props.$hasError ? "offline" : "primary",
+      color: !!props.$hasError ? "danger" : "primary",
       weight: "semibold",
     };
   }
@@ -74,6 +74,7 @@ export const TextInputField = styled.TextInput.attrs<TextInputFieldProps>(
   })
 )`
   padding: 0px;
+  width: 100%;
 
   border-radius: 40px;
 
@@ -82,12 +83,12 @@ export const TextInputField = styled.TextInput.attrs<TextInputFieldProps>(
 
     return css`
       height: ${window.scale(20)}px;
-
       color: ${colors.field.color};
       background-color: ${colors.field.background};
-      border: 1px #fff;
+      border-width: 1px;
+      border-color: ${colors.field.border ?? "#fff"};
       font-family: ${fonts.montserrat.medium};
-      font-size: ${window.scale(10)}px;
+      font-size: ${window.scale(8)}px;
 
       ${variantsInput[$variant].field};
     `;

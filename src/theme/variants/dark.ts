@@ -8,6 +8,7 @@ export const darkTheme: ITheme = {
       white: colors.white,
       primary: colors.primary,
       secondary: colors.secondary,
+      danger: colors.danger,
     },
     icon: {
       black: colors.black,

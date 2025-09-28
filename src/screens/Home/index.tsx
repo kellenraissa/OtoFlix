@@ -4,6 +4,7 @@ import Empty from "@/components/Empty";
 import Loading from "@/components/Loading";
 import LoadMore from "@/components/LoadMore";
 import { Text } from "@/components/Text";
+import TextButton from "@/components/TextButton";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchTopMovies, moviesReset } from "@/store/movies";
 import {
@@ -13,6 +14,7 @@ import {
   selectMoviesListTotal,
 } from "@/store/movies/selectors";
 import { RequestStatus } from "@/types/RequestStatus";
+import { useRouter } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
 import { RefreshControl } from "react-native";
 import { MoviesList, UserContent } from "./styles";
@@ -23,6 +25,7 @@ export default function HomeScreen() {
   const status = useAppSelector(selectMoviesListStatus);
   const page = useAppSelector(selectMoviesListPage);
   const total = useAppSelector(selectMoviesListTotal);
+  const router = useRouter();
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -51,6 +54,10 @@ export default function HomeScreen() {
     <ContainerGradient>
       <>
         <UserContent>
+          <TextButton
+            onPress={() => router.push("/favorites")}
+            style={{ alignSelf: "flex-end" }}
+          />
           <Text size={8} weight="semibold" color="white">
             Olá!
           </Text>

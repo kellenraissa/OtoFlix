@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { authSlice } from "./auth";
 import { detailsReducer } from "./details";
 import { favoritesSlice } from "./favorites";
 import { moviesReducer } from "./movies";
@@ -9,6 +10,7 @@ export const store = configureStore({
     movies: moviesReducer,
     details: detailsReducer,
     favorites: favoritesSlice,
+    auth: authSlice,
     ui: uiReducer,
   },
 });

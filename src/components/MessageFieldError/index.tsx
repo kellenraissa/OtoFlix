@@ -11,7 +11,7 @@ interface MessageFieldErrorProps extends ViewProps {
 export function MessageFieldError({ error, ...rest }: MessageFieldErrorProps) {
   return (
     <TextInputContentError {...rest}>
-      <Icon name="WarningCircle" size="thin" color="offline" />
+      <Icon name="WarningCircle" size="thin" color="primary" />
       <TextInputMessageError>{error}</TextInputMessageError>
     </TextInputContentError>
   );

@@ -1,6 +1,6 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
-import {Text} from '../Text';
+import { Text } from "../Text";
 
 export const TextInputContentError = styled.View`
   flex-direction: row;
@@ -9,8 +9,8 @@ export const TextInputContentError = styled.View`
 `;
 
 export const TextInputMessageError = styled(Text).attrs({
-  color: 'offline',
-  weight: 'semibold',
+  color: "primary",
+  weight: "regular",
 })`
-  font-size: ${props => props.theme.window.scale(12)}px;
+  font-size: ${(props) => props.theme.window.scale(6)}px;
 `;

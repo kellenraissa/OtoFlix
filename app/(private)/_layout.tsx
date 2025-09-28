@@ -1,14 +1,16 @@
-import FavoriteButtonNavigate from "@/components/FavoriteButtonNavigate";
+import TextButton from "@/components/TextButton";
+import { signOut } from "@/store/auth";
+import { useAppDispatch } from "@/store/hooks";
 import { useAppTheme } from "@/theme";
 import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
-import { Stack, useRouter } from "expo-router";
+import { Stack } from "expo-router";
 import React, { useMemo } from "react";
 import { Image, StyleSheet } from "react-native";
 
 const LOGO = require("@/assets/images/OtoFlix.png");
 
 export default function StackLayout() {
-  const router = useRouter();
+  const dispatch = useAppDispatch();
   const theme = useAppTheme();
 
   const baseHeaderOptions: NativeStackNavigationOptions = useMemo(
@@ -36,7 +38,12 @@ export default function StackLayout() {
             <Image source={LOGO} style={styles.logo} resizeMode="contain" />
           ),
           headerRight: () => (
-            <FavoriteButtonNavigate onPress={() => router.push("/favorites")} />
+            <TextButton
+              text="Sair"
+              icon="SignOut"
+              style={{ alignSelf: "flex-end" }}
+              onPress={() => dispatch(signOut())}
+            />
           ),
         }}
         name="index"
@@ -61,4 +68,5 @@ export default function StackLayout() {
 
 const styles = StyleSheet.create({
   logo: { width: 80, height: 40, borderRadius: 8 },
+  righHeaderHome: { flexDirection: "column", gap: 10 },
 });
