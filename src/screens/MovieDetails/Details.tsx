@@ -4,7 +4,7 @@ import ToogleFavoriteButton from "@/components/ToggleFavoriteButton";
 import { DetailsType } from "@/types/details";
 import { getMonthYear } from "@/utils/getDate";
 import { formatMoney } from "@/utils/getMoney";
-import { ViewProps } from "react-native";
+import { View, ViewProps } from "react-native";
 import { Content } from "./styles";
 
 interface DetailsComponentProps extends ViewProps {
@@ -30,7 +30,9 @@ export default function Details({ movie }: DetailsComponentProps) {
       <Text size={6} weight="medium" color="white">
         Receita: {formatMoney(movie.revenue, "USD")}
       </Text>
-      <ToogleFavoriteButton movie={movie} />
+      <View style={{ width: "100%", alignItems: "flex-end", marginBottom: 6 }}>
+        <ToogleFavoriteButton movie={movie} />
+      </View>
 
       <Text
         size={6}

@@ -1,4 +1,7 @@
+import { AuthProvider, useAuth } from "@/context/useAuth";
 import { store } from "@/store";
+import { watchFavorites } from "@/store/favorites";
+import { AppThemeProvider, useAppTheme } from "@/theme";
 import { useFonts } from "expo-font";
 import {
   Slot,
@@ -10,10 +13,6 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
-
-import { AuthProvider, useAuth } from "@/context/useAuth";
-import { watchFavorites } from "@/store/favorites";
-import { AppThemeProvider, useAppTheme } from "@/theme";
 
 SplashScreen.preventAutoHideAsync();
 
