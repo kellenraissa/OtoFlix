@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-export const CardContainer = styled.View`
+export const CardContainer = styled.TouchableOpacity`
   flex-direction: row;
   padding: 12px;
   gap: 12px;

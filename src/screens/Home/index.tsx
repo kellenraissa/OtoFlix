@@ -1,31 +1,34 @@
 import Card from "@/components/Card";
 import ContainerGradient from "@/components/ContainerGradient";
+import Empty from "@/components/Empty";
+import Loading from "@/components/Loading";
+import LoadMore from "@/components/LoadMore";
 import { Text } from "@/components/Text";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { fetchPopularMovies, moviesReset } from "@/store/movies";
+import { fetchTopMovies, moviesReset } from "@/store/movies";
 import {
-  selectMovies,
-  selectMoviesPage,
-  selectMoviesStatus,
-  selectMoviesTotal,
+  selectMoviesList,
+  selectMoviesListPage,
+  selectMoviesListStatus,
+  selectMoviesListTotal,
 } from "@/store/movies/selectors";
 import { RequestStatus } from "@/types/RequestStatus";
 import React, { useCallback, useEffect, useState } from "react";
-import { RefreshControl, TouchableOpacity } from "react-native";
+import { RefreshControl } from "react-native";
 import { MoviesList, UserContent } from "./styles";
 
 export default function HomeScreen() {
   const dispatch = useAppDispatch();
-  const items = useAppSelector(selectMovies);
-  const status = useAppSelector(selectMoviesStatus);
-  const page = useAppSelector(selectMoviesPage);
-  const total = useAppSelector(selectMoviesTotal);
+  const items = useAppSelector(selectMoviesList);
+  const status = useAppSelector(selectMoviesListStatus);
+  const page = useAppSelector(selectMoviesListPage);
+  const total = useAppSelector(selectMoviesListTotal);
 
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     if (items.length === 0) {
-      dispatch(fetchPopularMovies(1));
+      dispatch(fetchTopMovies(1));
     }
   }, [dispatch, items.length]);
 
@@ -33,14 +36,14 @@ export default function HomeScreen() {
 
   const loadMore = useCallback(() => {
     if (canLoadMore) {
-      dispatch(fetchPopularMovies(page + 1));
+      dispatch(fetchTopMovies(page + 1));
     }
   }, [dispatch, page, canLoadMore]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     dispatch(moviesReset());
-    await dispatch(fetchPopularMovies(1));
+    await dispatch(fetchTopMovies(1));
     setRefreshing(false);
   }, [dispatch]);
 
@@ -65,34 +68,15 @@ export default function HomeScreen() {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
           ListFooterComponent={
-            <TouchableOpacity
+            <LoadMore
               disabled={!canLoadMore}
               onPress={loadMore}
-              style={{
-                padding: 16,
-                alignItems: "center",
-                opacity: canLoadMore ? 1 : 0.5,
-              }}
-            >
-              <Text>
-                {status === RequestStatus.Loading
-                  ? "Carregando..."
-                  : canLoadMore
-                  ? "Carregar mais"
-                  : "Fim da lista"}
-              </Text>
-            </TouchableOpacity>
+              canLoadMore={canLoadMore}
+              status={status}
+            />
           }
           ListEmptyComponent={
-            status === RequestStatus.Loading ? (
-              <Text style={{ textAlign: "center", marginTop: 24 }}>
-                Carregando...
-              </Text>
-            ) : (
-              <Text style={{ textAlign: "center", marginTop: 24 }}>
-                Nenhum item.
-              </Text>
-            )
+            status === RequestStatus.Loading ? <Loading /> : <Empty />
           }
         />
       </>

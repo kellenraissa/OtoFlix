@@ -50,7 +50,11 @@ export function RatingStars({
         ))}
       </View>
 
-      {showNumber && <Text color={"white"}>{rating10?.toFixed(1)}/10</Text>}
+      {showNumber && (
+        <Text size={6} color={"white"}>
+          {rating10?.toFixed(1)}/10
+        </Text>
+      )}
     </View>
   );
 }

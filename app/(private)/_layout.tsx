@@ -30,7 +30,22 @@ export default function StackLayout() {
         }}
         name="index"
       />
-      <Stack.Screen name="explore" options={{ title: "Explore" }} />
+      <Stack.Screen
+        options={{
+          title: "Detalhes",
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: "#000",
+          },
+          headerTitleStyle: {
+            color: "#fff",
+            fontSize: 20,
+            fontWeight: "600",
+          },
+          headerTintColor: "#fff",
+        }}
+        name="[movieId]"
+      />
     </Stack>
   );
 }
