@@ -15,14 +15,6 @@ export default function FavoritesScreen() {
   const favorites = useAppSelector(selectFavoritesList);
   const [showModal, setShowModal] = useState(false);
 
-  if (favorites.length === 0) {
-    return (
-      <ContainerGradient>
-        <Empty text="Sem filmes favoritos no momento" />
-      </ContainerGradient>
-    );
-  }
-
   return (
     <>
       <ContainerGradient>
@@ -39,6 +31,9 @@ export default function FavoritesScreen() {
             data={favorites}
             keyExtractor={(m) => String(m.id)}
             renderItem={({ item }) => <Card movie={item} />}
+            ListEmptyComponent={
+              <Empty text="Sem filmes favoritos no momento" />
+            }
           />
         </>
       </ContainerGradient>

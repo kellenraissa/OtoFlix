@@ -45,6 +45,7 @@ export default function RootLayout() {
         <AuthGate />
         <ThemedStatusBar />
         <Slot />
+
         <FlashMessage position="top" />
       </Provider>
     </AppThemeProvider>

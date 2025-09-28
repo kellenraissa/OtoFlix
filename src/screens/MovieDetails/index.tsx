@@ -2,6 +2,7 @@ import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
 
+import Bottom from "@/components/Bottom";
 import ContainerGradient from "@/components/ContainerGradient";
 import Empty from "@/components/Empty";
 import Loading from "@/components/Loading";
@@ -14,7 +15,6 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RequestStatus } from "@/types/RequestStatus";
 import { pathImageTmdb } from "@/utils/pathImageTmdb";
-import { View } from "react-native";
 import Details from "./Details";
 import GradientFade from "./GradientFade";
 import { DetailsScroll, HeaderWrap, styles } from "./styles";
@@ -62,9 +62,8 @@ export default function MovieDetailsScreen() {
           />
           <GradientFade />
         </HeaderWrap>
-
+        <Bottom />
         <Details movie={movie} />
-        <View style={{ height: 40 }} />
       </DetailsScroll>
     </ContainerGradient>
   );
