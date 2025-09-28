@@ -6,6 +6,8 @@ interface EmptyProps {
   text?: string;
 }
 
+const EMPTY = require("@/assets/images/empty.png");
+
 export default function Empty({
   text = "Não encontramos nenhum filme no momento.",
 }) {
@@ -19,10 +21,7 @@ export default function Empty({
           {text}
         </Text>
       </EmptyTextContent>
-      <Image
-        source={require("@/assets/images/empty.png")}
-        style={{ width: 200, height: 180 }}
-      />
+      <Image source={EMPTY} style={{ width: 200, height: 180 }} />
     </EmptyContainer>
   );
 }

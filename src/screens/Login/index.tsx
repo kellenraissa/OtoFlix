@@ -10,6 +10,9 @@ import React from "react";
 import { Image, ImageBackground } from "react-native";
 import { Container, FormFields, ScrollViewStyled } from "./styles";
 
+const BACKGROUND = require("@/assets/images/backgroundLogin.png");
+const LOGO = require("@/assets/images/OtoFlix.png");
+
 export default function LoginScreen() {
   const dispatch = useAppDispatch();
 
@@ -25,13 +28,10 @@ export default function LoginScreen() {
     });
 
   return (
-    <ImageBackground
-      source={require("@/assets/images/backgroundLogin.png")}
-      style={{ flex: 1, width: "100%" }}
-    >
+    <ImageBackground source={BACKGROUND} style={{ flex: 1, width: "100%" }}>
       <ScrollViewStyled>
         <Container>
-          <Image source={require("@/assets/images/OtoFlix.png")} />
+          <Image source={LOGO} />
           <Text color="white" size={10} isCenter>
             Realize seu login para continuar
           </Text>
