@@ -1,13 +1,13 @@
 import { RatingStars } from "@/components/RatingStarts";
 import { Text } from "@/components/Text";
-import { MovieByIdResponse } from "@/types/movies";
+import { DetailsByIdResponse } from "@/types/details";
 import { getMonthYear } from "@/utils/getDate";
 import { formatMoney } from "@/utils/getMoney";
 import { ViewProps } from "react-native";
 import { Content } from "./styles";
 
 interface DetailsProps extends ViewProps {
-  movie: MovieByIdResponse;
+  movie: DetailsByIdResponse;
 }
 
 export default function Details({ movie }: DetailsProps) {

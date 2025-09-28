@@ -1,7 +1,7 @@
 import { RequestStatus } from "@/types/RequestStatus";
 import { createSlice } from "@reduxjs/toolkit";
 import { MOVIES_NAMESPACE } from "./constants";
-import { fetchMovieById, fetchTopMovies } from "./thunks";
+import { fetchTopMovies } from "./thunks";
 import type { MoviesState } from "./types";
 
 const initialState: MoviesState = {
@@ -11,17 +11,13 @@ const initialState: MoviesState = {
     totalPages: 1,
     status: RequestStatus.Idle,
   },
-  detail: {
-    current: undefined,
-    status: RequestStatus.Idle,
-  },
 };
 
 const moviesSlice = createSlice({
   name: MOVIES_NAMESPACE,
   initialState,
   reducers: {
-    resetList(state) {
+    reset(state) {
       state.list = {
         items: [],
         page: 0,
@@ -29,11 +25,6 @@ const moviesSlice = createSlice({
         status: RequestStatus.Idle,
         error: undefined,
       };
-    },
-    clearDetail(state) {
-      state.detail.current = undefined;
-      state.detail.status = RequestStatus.Idle;
-      state.detail.error = undefined;
     },
   },
   extraReducers: (b) => {
@@ -55,22 +46,8 @@ const moviesSlice = createSlice({
       s.list.status = RequestStatus.Failed;
       s.list.error = a.error.message;
     });
-
-    // -------- Get Details movie ----------------
-    b.addCase(fetchMovieById.pending, (s) => {
-      s.detail.status = RequestStatus.Loading;
-      s.detail.error = undefined;
-    });
-    b.addCase(fetchMovieById.fulfilled, (s, a) => {
-      s.detail.status = RequestStatus.Succeeded;
-      s.detail.current = a.payload;
-    });
-    b.addCase(fetchMovieById.rejected, (s, a) => {
-      s.detail.status = RequestStatus.Failed;
-      s.detail.error = a.error.message;
-    });
   },
 });
 
-export const { resetList, clearDetail } = moviesSlice.actions;
+export const { reset } = moviesSlice.actions;
 export default moviesSlice.reducer;

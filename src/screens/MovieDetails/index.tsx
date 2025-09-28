@@ -5,13 +5,13 @@ import React, { useEffect } from "react";
 import ContainerGradient from "@/components/ContainerGradient";
 import Empty from "@/components/Empty";
 import Loading from "@/components/Loading";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { fetchMovieById } from "@/store/movies";
+import { fetchDetailsById } from "@/store/details";
 import {
   selectMovieDetail,
   selectMovieDetailError,
   selectMovieDetailStatus,
-} from "@/store/movies/selectors";
+} from "@/store/details/selectors";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RequestStatus } from "@/types/RequestStatus";
 import { pathImageTmdb } from "@/utils/pathImageTmdb";
 import Details from "./Details";
@@ -27,7 +27,7 @@ export default function MovieDetailsScreen() {
   const error = useAppSelector(selectMovieDetailError);
 
   useEffect(() => {
-    if (movieId) dispatch(fetchMovieById(movieId));
+    if (movieId) dispatch(fetchDetailsById(movieId));
   }, [dispatch, movieId]);
 
   if (status === RequestStatus.Loading) {
