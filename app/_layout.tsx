@@ -9,6 +9,7 @@ import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 
 import React, { useEffect } from "react";
+import FlashMessage from "react-native-flash-message";
 import { Provider } from "react-redux";
 
 SplashScreen.preventAutoHideAsync();
@@ -44,6 +45,7 @@ export default function RootLayout() {
         <AuthGate />
         <ThemedStatusBar />
         <Slot />
+        <FlashMessage position="top" />
       </Provider>
     </AppThemeProvider>
   );

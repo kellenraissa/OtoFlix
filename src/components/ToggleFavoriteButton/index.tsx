@@ -1,7 +1,8 @@
-import { selectIsFavorite } from "@/store/favorites/selectors";
+import { makeSelectIsFavorite } from "@/store/favorites/selectors";
 import { toggle } from "@/store/favorites/slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { DetailsType } from "@/types/details";
+import { useMemo } from "react";
 import { Icon } from "../Icon";
 import { Text } from "../Text";
 import { TootgleFavoritContainer } from "./styles";
@@ -16,7 +17,11 @@ export default function ToogleFavoriteButton({
   hideText = false,
 }: ToogleFavoriteButtonProps) {
   const dispatch = useAppDispatch();
-  const isFav = useAppSelector(selectIsFavorite(movie.id));
+  const isFavSelector = useMemo(
+    () => makeSelectIsFavorite(movie.id),
+    [movie.id]
+  );
+  const isFav = useAppSelector(isFavSelector);
 
   return (
     <TootgleFavoritContainer>

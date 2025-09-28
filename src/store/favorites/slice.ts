@@ -28,7 +28,7 @@ const favoritesSlice = createSlice({
       else state.items[m.id] = m;
     },
     clear(state) {
-      state.items = [];
+      state.items = {};
     },
   },
 });
