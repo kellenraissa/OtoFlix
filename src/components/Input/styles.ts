@@ -41,7 +41,7 @@ export const TextInputIcon = styled(Icon.Button).attrs<TextInputIconProps>(
   (props) => ({
     size: "small",
     weight: "regular",
-    color: props.$isFocused ? "white" : "zinc_600",
+    color: props.$isFocused ? "primary" : "white",
   })
 )`
   position: absolute;
@@ -54,7 +54,7 @@ export const TextInputIconRight = styled(Icon.Button).attrs<TextInputIconProps>(
   (props) => ({
     size: "small",
     weight: "regular",
-    color: props.$isFocused ? "white" : "zinc_600",
+    color: props.$isFocused ? "primary" : "white",
   })
 )`
   position: absolute;

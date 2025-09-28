@@ -17,7 +17,7 @@ export function Icon({
   colorHex,
   name = "User",
   size = "normal",
-  color = "primary",
+  color = "white",
   ...rest
 }: IconProps) {
   const theme = useAppTheme();

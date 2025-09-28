@@ -10,7 +10,7 @@ export default function FavoriteButtonNavigate({
 }: FavoriteButtonNavigateProps) {
   return (
     <FavoriteButtonContainer {...rest}>
-      <Icon name={"Heart"} />
+      <Icon color="primary" name={"Heart"} />
       <Text size={6} style={{ paddingTop: 3 }}>
         Favoritos
       </Text>
