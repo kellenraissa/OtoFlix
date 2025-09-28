@@ -13,5 +13,5 @@ export const UserContent = styled.View`
   padding: 10px;
   background-color: transparent;
   border-radius: 10px;
-  gap: 10px;
+  gap: 4px;
 `;

@@ -16,7 +16,6 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    // simula carregamento inicial (ex.: AsyncStorage ou API)
     const t = setTimeout(() => {
       setSession(null);
       setLoading(false);

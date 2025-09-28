@@ -1,10 +1,10 @@
 import { getDetailsById } from "@/services/detailsService";
-import type { DetailsByIdResponse } from "@/types/details";
+import type { DetailsType } from "@/types/details";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { DETAILS_NAMESPACE } from "./constants";
 
 export const fetchDetailsById = createAsyncThunk<
-  DetailsByIdResponse,
+  DetailsType,
   string | undefined
 >(`${DETAILS_NAMESPACE}/byId`, async (movieId, { rejectWithValue }) => {
   if (!movieId && movieId !== "") {

@@ -67,5 +67,3 @@ export default function MovieDetailsScreen() {
     </ContainerGradient>
   );
 }
-
-const HEADER_HEIGHT = 320;

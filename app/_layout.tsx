@@ -12,6 +12,7 @@ import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 
 import { AuthProvider, useAuth } from "@/context/useAuth";
+import { watchFavorites } from "@/store/favorites";
 import { AppThemeProvider, useAppTheme } from "@/theme";
 
 SplashScreen.preventAutoHideAsync();
@@ -24,6 +25,11 @@ export default function RootLayout() {
     "Montserrat-SemiBold": require("../src/assets/fonts/Montserrat-SemiBold.ttf"),
     "Montserrat-Bold": require("../src/assets/fonts/Montserrat-Bold.ttf"),
   });
+
+  useEffect(() => {
+    const unsubscribe = watchFavorites(store);
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     if (loaded) SplashScreen.hideAsync();
@@ -64,5 +70,5 @@ function ThemedStatusBar() {
   const theme = useAppTheme();
   const isDark =
     theme.colors.background !== "#FFFFFF" && theme.colors.background !== "#fff";
-  return <StatusBar style={isDark ? "light" : "dark"} />;
+  return <StatusBar style={isDark ? "light" : "light"} />;
 }

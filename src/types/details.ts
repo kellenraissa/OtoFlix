@@ -23,7 +23,7 @@ type SpokenLanguages = {
   name?: string;
 };
 
-export interface DetailsByIdResponse {
+export interface DetailsType {
   adult?: boolean;
   backdrop_path?: string;
   belongs_to_collection?: string | null;
@@ -33,7 +33,7 @@ export interface DetailsByIdResponse {
     name?: string;
   }[];
   homepage?: string;
-  id?: number;
+  id: number;
   imdb_id?: string;
   origin_country?: string[];
   original_language?: string;

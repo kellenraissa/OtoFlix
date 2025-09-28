@@ -52,7 +52,7 @@ export default function HomeScreen() {
       <>
         <UserContent>
           <Text size={8} weight="semibold" color="white">
-            Olá, Kellen!
+            Olá!
           </Text>
           <Text size={7} color="white">
             Confira os top filmes que selecionamos para você!

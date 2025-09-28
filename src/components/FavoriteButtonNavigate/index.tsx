@@ -3,9 +3,11 @@ import { Icon } from "../Icon";
 import { Text } from "../Text";
 import { FavoriteButtonContainer } from "./styles";
 
-interface FavoriteButtonProps extends TouchableOpacityProps {}
+interface FavoriteButtonNavigateProps extends TouchableOpacityProps {}
 
-export default function FavoriteButton({ ...rest }: FavoriteButtonProps) {
+export default function FavoriteButtonNavigate({
+  ...rest
+}: FavoriteButtonNavigateProps) {
   return (
     <FavoriteButtonContainer {...rest}>
       <Icon name={"Star"} />

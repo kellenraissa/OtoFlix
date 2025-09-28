@@ -1,16 +1,17 @@
 import { RatingStars } from "@/components/RatingStarts";
 import { Text } from "@/components/Text";
-import { DetailsByIdResponse } from "@/types/details";
+import ToogleFavoriteButton from "@/components/ToggleFavoriteButton";
+import { DetailsType } from "@/types/details";
 import { getMonthYear } from "@/utils/getDate";
 import { formatMoney } from "@/utils/getMoney";
 import { ViewProps } from "react-native";
 import { Content } from "./styles";
 
-interface DetailsProps extends ViewProps {
-  movie: DetailsByIdResponse;
+interface DetailsComponentProps extends ViewProps {
+  movie: DetailsType;
 }
 
-export default function Details({ movie }: DetailsProps) {
+export default function Details({ movie }: DetailsComponentProps) {
   const year = getMonthYear(movie.release_date);
   return (
     <Content>
@@ -29,6 +30,7 @@ export default function Details({ movie }: DetailsProps) {
       <Text size={6} weight="medium" color="white">
         Receita: {formatMoney(movie.revenue, "USD")}
       </Text>
+      <ToogleFavoriteButton movie={movie} />
 
       <Text
         size={6}

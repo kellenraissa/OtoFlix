@@ -1,4 +1,4 @@
-import FavoriteButton from "@/components/FavoriteButton";
+import FavoriteButtonNavigate from "@/components/FavoriteButtonNavigate";
 import { Stack } from "expo-router";
 import React from "react";
 import { Image } from "react-native";
@@ -22,7 +22,7 @@ export default function StackLayout() {
             />
           ),
           headerRight: () => (
-            <FavoriteButton onPress={() => console.log("Clicou")} />
+            <FavoriteButtonNavigate onPress={() => console.log("Clicou")} />
           ),
           headerStyle: {
             backgroundColor: "#000",
