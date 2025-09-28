@@ -24,6 +24,9 @@ export const darkTheme: ITheme = {
     card: {
       background: colors.background.card,
     },
+    modal: {
+      background: colors.background.modal,
+    },
     button: {
       primary: {
         background: colors.primary,

@@ -10,7 +10,7 @@ export const Overlay = styled.View`
 `;
 
 export const Box = styled.View`
-  background-color: #1c1c1e;
+  background-color: ${({ theme }) => theme.colors.modal.background};
   padding: 24px;
   border-radius: 12px;
   width: 80%;

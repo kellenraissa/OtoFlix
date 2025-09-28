@@ -1,10 +1,12 @@
 import FavoriteButtonNavigate from "@/components/FavoriteButtonNavigate";
+import { useAppTheme } from "@/theme";
 import { Stack, useRouter } from "expo-router";
 import React from "react";
 import { Image } from "react-native";
 
 export default function StackLayout() {
   const router = useRouter();
+  const theme = useAppTheme();
   return (
     <Stack
       screenOptions={{
@@ -42,6 +44,7 @@ export default function StackLayout() {
             color: "#fff",
             fontSize: 20,
             fontWeight: "600",
+            fontFamily: theme.fonts.montserrat.medium,
           },
           headerTintColor: "#fff",
         }}
@@ -58,6 +61,7 @@ export default function StackLayout() {
             color: "#fff",
             fontSize: 20,
             fontWeight: "600",
+            fontFamily: theme.fonts.montserrat.medium,
           },
           headerTintColor: "#fff",
         }}

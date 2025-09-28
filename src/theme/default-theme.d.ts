@@ -33,6 +33,10 @@ interface CardThemeProps {
   background: string;
 }
 
+interface ModalThemeProps {
+  background: string;
+}
+
 interface MenuThemeProps {
   border: string;
   background: string;

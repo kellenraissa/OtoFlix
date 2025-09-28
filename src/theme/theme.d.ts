@@ -6,6 +6,7 @@ interface ThemeColors {
   text: TextRecord;
   icon: IconRecord;
   card: CardThemeProps;
+  modal: ModalThemeProps;
   toast: ToastRecord;
   button: ButtonRecord;
   field: FieldRecord;

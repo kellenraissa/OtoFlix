@@ -1,12 +1,13 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import ContainerGradient from "@/components/ContainerGradient";
+import Empty from "@/components/Empty";
 import ConfirmRemoveFavoritesModal from "@/components/ModalConfirm";
 import { clear } from "@/store/favorites";
 import { selectFavoritesList } from "@/store/favorites/selectors";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import React, { useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 
 export default function FavoritesScreen() {
   const dispatch = useAppDispatch();
@@ -15,9 +16,9 @@ export default function FavoritesScreen() {
 
   if (favorites.length === 0) {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ color: "white" }}>Sem favoritos ainda</Text>
-      </View>
+      <ContainerGradient>
+        <Empty text="Sem favoritos no momento" />
+      </ContainerGradient>
     );
   }
 
@@ -48,7 +49,6 @@ export default function FavoritesScreen() {
           setShowModal(false);
         }}
       />
-      ;
     </>
   );
 }

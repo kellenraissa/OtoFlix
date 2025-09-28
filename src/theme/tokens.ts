@@ -17,6 +17,7 @@ export const colors = {
   zinc_800: "#727272",
 
   background: {
+    modal: "#1c1c1e",
     card: "rgba(225, 225, 225, 0.05)",
     dark_300: "#484848",
     dark_400: "#3A3A3A",
