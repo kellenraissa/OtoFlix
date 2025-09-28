@@ -58,7 +58,7 @@ export const TextInputIconRight = styled(Icon.Button).attrs<TextInputIconProps>(
   })
 )`
   position: absolute;
-  bottom: ${Platform.OS === "android" ? 22 : 12}px;
+  bottom: ${Platform.OS === "android" ? 22 : 22}px;
 
   right: 16px;
 `;

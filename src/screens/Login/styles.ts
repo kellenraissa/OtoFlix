@@ -11,7 +11,17 @@ export const Container = styled(SafeAreaView)`
 export const FormFields = styled.View`
   width: 100%;
   gap: ${(props) => props.theme.window.scale(12)};
-  margin-top: ${({ theme }) => theme.window.scale(26)}px;
+  /* margin-top: ${({ theme }) => theme.window.scale(26)}px; */
+  margin-bottom: ${({ theme }) => theme.window.scale(10)}px;
+`;
+
+export const LogoTextContent = styled.View`
+  height: ${({ theme }) => theme.window.scale(64)}px;
+  width: 100%;
+
+  align-items: center;
+  gap: ${({ theme }) => theme.window.scale(20)}px;
+  margin-bottom: ${({ theme }) => theme.window.scale(16)}px;
 `;
 
 export const ScrollViewStyled = styled.ScrollView.attrs((props) => ({
@@ -21,7 +31,7 @@ export const ScrollViewStyled = styled.ScrollView.attrs((props) => ({
     paddingTop: props.theme.window.scale(8),
     paddingBottom: props.theme.window.scale(12),
     paddingHorizontal: "4%",
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
+
     flex: 1,
   },
 }))``;

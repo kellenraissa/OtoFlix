@@ -14,6 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { RequestStatus } from "@/types/RequestStatus";
 import { pathImageTmdb } from "@/utils/pathImageTmdb";
+import { View } from "react-native";
 import Details from "./Details";
 import GradientFade from "./GradientFade";
 import { DetailsScroll, HeaderWrap, styles } from "./styles";
@@ -63,6 +64,7 @@ export default function MovieDetailsScreen() {
         </HeaderWrap>
 
         <Details movie={movie} />
+        <View style={{ height: 40 }} />
       </DetailsScroll>
     </ContainerGradient>
   );

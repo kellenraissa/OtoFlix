@@ -1,4 +1,4 @@
-import {css} from 'styled-components/native';
+import { css } from "styled-components/native";
 
 export const variantsInput = {
   default: {
@@ -6,8 +6,8 @@ export const variantsInput = {
       left: 16px;
     `,
     field: css`
-      padding-right: ${props => props.theme.window.scale(16)}px;
-      padding-left: ${props => props.theme.window.scale(16 + 20 + 8)}px;
+      padding-right: ${(props) => props.theme.window.scale(16)}px;
+      padding-left: ${(props) => props.theme.window.scale(20)}px;
     `,
   },
   inverted: {
@@ -15,8 +15,8 @@ export const variantsInput = {
       right: 16px;
     `,
     field: css`
-      padding-left: ${props => props.theme.window.scale(16)}px;
-      padding-right: ${props => props.theme.window.scale(16 + 20 + 8)}px;
+      padding-left: ${(props) => props.theme.window.scale(16)}px;
+      padding-right: ${(props) => props.theme.window.scale(20)}px;
     `,
   },
 } as const;
