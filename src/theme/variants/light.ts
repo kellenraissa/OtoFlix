@@ -21,11 +21,5 @@ export const lightTheme: ITheme = {
       background: colors.background.light_200,
       border: colors.zinc_400,
     },
-    menu: {
-      ...darkTheme.colors.menu,
-      background: colors.background.light_200,
-      container: { default: "#F0F0F0", active: colors.primary },
-      icon: { default: colors.zinc_600, active: colors.black },
-    },
   },
 };

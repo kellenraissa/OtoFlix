@@ -48,7 +48,7 @@ export const darkTheme: ITheme = {
     field: {
       color: colors.white,
       placeholder: colors.zinc_600,
-      background: colors.background.dark_300,
+      background: colors.background.light_200,
       border: colors.zinc_600,
     },
   },
