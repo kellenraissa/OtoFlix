@@ -6,7 +6,6 @@ import { AuthState } from "./types";
 const initialState: AuthState = {
   session: null,
   loading: true, // for hydratation
-  signingIn: false,
 };
 
 const authSlice = createSlice({
@@ -22,16 +21,6 @@ const authSlice = createSlice({
     },
     signOut(state) {
       state.session = null;
-    },
-    signInStart(state) {
-      state.signingIn = true;
-    },
-    signInSuccess(state, action) {
-      state.session = action.payload;
-      state.signingIn = false;
-    },
-    signInFailure(state) {
-      state.signingIn = false;
     },
   },
 });

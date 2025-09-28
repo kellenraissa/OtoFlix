@@ -1,23 +1,15 @@
+import { AuthGate } from "@/components/AuthGate";
+import ThemedStatusBar from "@/components/ThemedStatusBar";
 import { store } from "@/store";
-import {
-  hydrateAuth,
-  selectAuthLoading,
-  selectIsAuthenticated,
-  watchAuth,
-} from "@/store/auth";
+import { hydrateAuth, watchAuth } from "@/store/auth";
 import { hydrateFavorites, watchFavorites } from "@/store/favorites";
-import { AppThemeProvider, useAppTheme } from "@/theme";
+import { AppThemeProvider } from "@/theme";
 import { useFonts } from "expo-font";
-import {
-  Slot,
-  useRootNavigationState,
-  useRouter,
-  useSegments,
-} from "expo-router";
+import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
+
 import React, { useEffect } from "react";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -55,29 +47,4 @@ export default function RootLayout() {
       </Provider>
     </AppThemeProvider>
   );
-}
-
-function AuthGate() {
-  const rootState = useRootNavigationState();
-  const segments = useSegments();
-  const router = useRouter();
-
-  const loading = useSelector(selectAuthLoading);
-  const isAuthed = useSelector(selectIsAuthenticated);
-  const inAuthGroup = segments[0] === "(auth)";
-
-  useEffect(() => {
-    if (!rootState?.key || loading) return;
-    if (!isAuthed && !inAuthGroup) router.replace("/(auth)/login");
-    if (isAuthed && inAuthGroup) router.replace("/(private)");
-  }, [rootState?.key, loading, isAuthed, inAuthGroup, router]);
-
-  return null;
-}
-
-function ThemedStatusBar() {
-  const theme = useAppTheme();
-  const isDark =
-    theme.colors.background !== "#FFFFFF" && theme.colors.background !== "#fff";
-  return <StatusBar style={isDark ? "light" : "light"} />;
 }
