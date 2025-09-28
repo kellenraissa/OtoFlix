@@ -6,19 +6,25 @@ import { Icon } from "../Icon";
 import { Text } from "../Text";
 import { TootgleFavoritContainer } from "./styles";
 
+interface ToogleFavoriteButtonProps {
+  movie: DetailsType;
+  hideText?: boolean;
+}
+
 export default function ToogleFavoriteButton({
   movie,
-}: {
-  movie: DetailsType;
-}) {
+  hideText = false,
+}: ToogleFavoriteButtonProps) {
   const dispatch = useAppDispatch();
   const isFav = useAppSelector(selectIsFavorite(movie.id));
 
   return (
     <TootgleFavoritContainer>
-      <Text size={6} style={{ paddingTop: 3 }}>
-        {isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
-      </Text>
+      {!hideText && (
+        <Text size={6} style={{ paddingTop: 3 }}>
+          {isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+        </Text>
+      )}
       <Icon.Button
         name={"Heart"}
         weight={isFav ? "fill" : "light"}

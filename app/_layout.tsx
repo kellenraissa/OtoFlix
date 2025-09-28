@@ -1,6 +1,6 @@
 import { AuthProvider, useAuth } from "@/context/useAuth";
 import { store } from "@/store";
-import { watchFavorites } from "@/store/favorites";
+import { hydrateFavorites, watchFavorites } from "@/store/favorites";
 import { AppThemeProvider, useAppTheme } from "@/theme";
 import { useFonts } from "expo-font";
 import {
@@ -25,10 +25,14 @@ export default function RootLayout() {
     "Montserrat-Bold": require("../src/assets/fonts/Montserrat-Bold.ttf"),
   });
 
+  // --- Favorites persistence with MMKV ---
+  // Load saved favorites and keep Redux in sync
+  hydrateFavorites(store);
   useEffect(() => {
     const unsubscribe = watchFavorites(store);
     return () => unsubscribe();
   }, []);
+  //-----------------------------
 
   useEffect(() => {
     if (loaded) SplashScreen.hideAsync();

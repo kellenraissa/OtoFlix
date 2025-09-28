@@ -16,7 +16,8 @@ const Button = ({
   loading = false,
   type = "default",
   variant = "primary",
-  colorIcon = "offline",
+  colorIcon = "white",
+  size = "default",
   ...rest
 }: DefaultButtonProps) => {
   return (
@@ -24,12 +25,17 @@ const Button = ({
       $variant={variant}
       disabled={rest.disabled || loading}
       $isDisabled={rest.disabled}
+      $size={size}
       {...rest}
     >
       {!!icon && (
         <IconButton name={icon} $variant={variant} color={colorIcon} />
       )}
-      {!!text && !loading && <TextButton $variant={variant}>{text}</TextButton>}
+      {!!text && !loading && (
+        <TextButton $size={size} $variant={variant}>
+          {text}
+        </TextButton>
+      )}
 
       {loading && <Loading $variant={variant} />}
     </DefaultButtonContainer>

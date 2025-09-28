@@ -3,27 +3,29 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FAVORITES_NAMESPACE } from "./constants";
 import type { FavoritesState } from "./types";
 
-const initialState: FavoritesState = { items: [] };
+const initialState: FavoritesState = { items: {} };
 
 const favoritesSlice = createSlice({
   name: FAVORITES_NAMESPACE,
   initialState,
   reducers: {
     setAll(state, action: PayloadAction<DetailsType[]>) {
-      state.items = action.payload ?? [];
+      const list = action.payload ?? [];
+      const map: Record<number, DetailsType> = {};
+      for (const m of list) map[m.id] = m;
+      state.items = map;
     },
     add(state, action: PayloadAction<DetailsType>) {
       const m = action.payload;
-      if (!state.items.some((x) => x.id === m.id)) state.items.push(m);
+      state.items[m.id] = m;
     },
     remove(state, action: PayloadAction<number>) {
-      state.items = state.items.filter((x) => x.id !== action.payload);
+      delete state.items[action.payload];
     },
     toggle(state, action: PayloadAction<DetailsType>) {
       const m = action.payload;
-      const i = state.items.findIndex((x) => x.id === m.id);
-      if (i === -1) state.items.push(m);
-      else state.items.splice(i, 1);
+      if (state.items[m.id]) delete state.items[m.id];
+      else state.items[m.id] = m;
     },
     clear(state) {
       state.items = [];

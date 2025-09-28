@@ -1,21 +1,29 @@
-import { FavoritesStorage } from "@/services/FavoritesStorage";
-import type { RootState } from "@/store";
+import type { DetailsType } from "@/types/details";
 import type { Store } from "@reduxjs/toolkit";
+import { MMKV } from "react-native-mmkv";
 import { setAll } from "./slice";
 
-export function hydrateFavorites(store: Store<RootState>) {
-  const items = FavoritesStorage.getAll();
-  store.dispatch(setAll(items as any));
+const storage = new MMKV();
+const KEY = "otoflix@favorites";
+
+export function hydrateFavorites(store: Store) {
+  const raw = storage.getString(KEY);
+  if (!raw) return;
+  try {
+    const list = JSON.parse(raw) as DetailsType[];
+    store.dispatch(setAll(list));
+  } catch {}
 }
 
-export function watchFavorites(store: Store<RootState>) {
-  let prev = "";
+export function watchFavorites(store: Store) {
+  let lastJson = "";
   return store.subscribe(() => {
-    const items = store.getState().favorites.items;
-    const json = JSON.stringify(items);
-    if (json !== prev) {
-      prev = json;
-      FavoritesStorage.saveAll(items as any);
+    const state = store.getState();
+    const list = Object.values(state.favorites.items) as DetailsType[];
+    const json = JSON.stringify(list);
+    if (json !== lastJson) {
+      storage.set(KEY, json);
+      lastJson = json;
     }
   });
 }

@@ -7,14 +7,8 @@ interface ThemeColors {
   icon: IconRecord;
   card: CardThemeProps;
   toast: ToastRecord;
-  menu: MenuThemeProps;
   button: ButtonRecord;
   field: FieldRecord;
-  bottom: BottomRecord;
-  calendar: CalendarRecord;
-  divider: DividerRecord;
-  checkbox: CheckboxRecord;
-  attatchment: AttatchmentRecord;
 }
 
 interface ThemeWindow {

@@ -1,6 +1,8 @@
 import { IconNameProp } from "@components/Icon";
 import { StyleProp, TouchableOpacityProps, ViewStyle } from "react-native";
 
+export type SizeButton = "default" | "small";
+
 interface DefaultButtonProps extends TouchableOpacityProps {
   color?: string;
   variant?: ButtonVariantTypes;
@@ -13,4 +15,5 @@ interface DefaultButtonProps extends TouchableOpacityProps {
   iconColor?: IconColorType;
   type?: ButtonSize;
   colorIcon?: IconColorType;
+  size?: SizeButton;
 }

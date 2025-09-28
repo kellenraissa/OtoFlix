@@ -2,13 +2,8 @@
 
 type BlackAndWhiteType = "black" | "white";
 type ColorType = "primary" | "secondary" | "tertiary";
-type StatusType = "online" | "finished" | "pending" | "offline";
-type MaintenanceStatusType =
-  | "planned"
-  | "finished"
-  | "canceled"
-  | "overdue"
-  | "progress";
+type StatusType = "online" | "finished" | "pending" | "danger";
+
 type FontType = "light" | "regular" | "medium" | "semibold" | "bold";
 
 type ZincType = "zinc_400" | "zinc_600";
@@ -19,17 +14,12 @@ type TextColorType =
   | BlackAndWhiteType
   | ZincType
   | MaintenanceStatusType;
-type IconColorType =
-  | StatusType
-  | BlackAndWhiteType
-  | "primary"
-  | "yellow"
-  | ZincType;
+type IconColorType = BlackAndWhiteType | "primary" | "yellow";
 
 // ------------------ generic types components ------------------
 
 type MenuVariantTypes = "default" | "active";
-type ButtonVariantTypes = "primary" | "secondary" | "button_icon" | "clear";
+type ButtonVariantTypes = "primary" | "secondary" | "danger";
 
 // ------------------ values props colors ------------------
 

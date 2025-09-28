@@ -10,7 +10,7 @@ export const colors = {
   finished: "#6F8EFD",
   online: "#21E529",
   pending: "#E0AA22",
-  offline: "#EF4444",
+  danger: "#B00020",
 
   zinc_400: "#C3C3C3",
   zinc_600: "#a0a0a0",
@@ -19,7 +19,7 @@ export const colors = {
   background: {
     card: "rgba(225, 225, 225, 0.05)",
     dark_300: "#484848",
-    dark_400: "#393939",
+    dark_400: "#3A3A3A",
     dark_600: "#2A2A2A",
     dark_700: "#202020",
     dark_800: "#1D1D1D",

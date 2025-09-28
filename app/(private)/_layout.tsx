@@ -1,9 +1,10 @@
 import FavoriteButtonNavigate from "@/components/FavoriteButtonNavigate";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import React from "react";
 import { Image } from "react-native";
 
 export default function StackLayout() {
+  const router = useRouter();
   return (
     <Stack
       screenOptions={{
@@ -22,7 +23,7 @@ export default function StackLayout() {
             />
           ),
           headerRight: () => (
-            <FavoriteButtonNavigate onPress={() => console.log("Clicou")} />
+            <FavoriteButtonNavigate onPress={() => router.push("/favorites")} />
           ),
           headerStyle: {
             backgroundColor: "#000",
@@ -45,6 +46,22 @@ export default function StackLayout() {
           headerTintColor: "#fff",
         }}
         name="[movieId]"
+      />
+      <Stack.Screen
+        options={{
+          title: "Favoritos",
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: "#000",
+          },
+          headerTitleStyle: {
+            color: "#fff",
+            fontSize: 20,
+            fontWeight: "600",
+          },
+          headerTintColor: "#fff",
+        }}
+        name="favorites"
       />
     </Stack>
   );
