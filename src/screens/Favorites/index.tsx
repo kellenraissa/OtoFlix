@@ -20,12 +20,14 @@ export default function FavoritesScreen() {
       <ContainerGradient>
         <>
           <View style={{ padding: 20 }}>
-            <Button
-              text="Remover todos"
-              icon="HeartBreak"
-              colorIcon="white"
-              onPress={() => setShowModal(true)}
-            />
+            {favorites.length !== 0 && (
+              <Button
+                text="Remover todos"
+                icon="HeartBreak"
+                colorIcon="white"
+                onPress={() => setShowModal(true)}
+              />
+            )}
           </View>
           <FlatList
             data={favorites}
