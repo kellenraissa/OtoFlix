@@ -1,8 +1,7 @@
-import { MMKV } from "react-native-mmkv";
+import { storage } from "@/services/FavoritesStorage";
 
 export type Session = { email: string } | null;
 
-const storage = new MMKV();
 const KEY = "otoflix@auth_session";
 
 function parse<T>(raw?: string | null): T | null {

@@ -1,9 +1,8 @@
+import { storage } from "@/services/FavoritesStorage";
 import type { DetailsType } from "@/types/details";
 import type { Store } from "@reduxjs/toolkit";
-import { MMKV } from "react-native-mmkv";
 import { setAll } from "./slice";
 
-const storage = new MMKV();
 const KEY = "otoflix@favorites";
 
 export function hydrateFavorites(store: Store) {
