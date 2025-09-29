@@ -10,6 +10,7 @@ export const HeaderWrap = styled.View`
 `;
 
 export const DetailsScroll = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
   contentContainerStyle: { paddingBottom: 24 },
 })`
   flex: 1;

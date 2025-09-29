@@ -3,6 +3,7 @@ import { FlatList } from "react-native";
 import styled from "styled-components/native";
 
 export const MoviesList = styled(FlatList<MovieType>).attrs({
+  showsVerticalScrollIndicator: false,
   contentContainerStyle: {
     gap: 12,
   },

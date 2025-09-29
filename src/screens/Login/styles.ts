@@ -11,7 +11,6 @@ export const Container = styled(SafeAreaView)`
 export const FormFields = styled.View`
   width: 100%;
   gap: ${(props) => props.theme.window.scale(12)};
-  /* margin-top: ${({ theme }) => theme.window.scale(26)}px; */
   margin-bottom: ${({ theme }) => theme.window.scale(10)}px;
 `;
 
